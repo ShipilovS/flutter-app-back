@@ -48,3 +48,21 @@ end
 
 
 gem "dotenv-rails", "~> 2.8"
+
+gem "rswag", "~> 2.10"
+
+gem "rspec-rails", "~> 6.0"
+
+gem "devise", "~> 4.9"
+
+gem "jwt", "~> 2.7"
+
+gem "bcrypt", "~> 3.1"
+
+gem "pundit", "~> 2.3"
+
+gem "pry-rails", "~> 0.3.9"
+
+gem "pry", "~> 0.14.2"
+
+gem "bcrypt-ruby", "~> 3.1"
