@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::API
   include Pundit::Authorization
   include AuthJwt
+  include ErrorsHelper
+
   before_action :authenticate, except: [:login]
 
   private

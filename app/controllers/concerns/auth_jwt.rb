@@ -2,9 +2,10 @@ require 'jwt'
 
 module AuthJwt
   extend ActiveSupport::Concern
+  EXP = 1.day.freeze
 
-  def jwt_encode(payload, exp = 1.day.from_now)
-    payload[:exp] = exp.to_i
+  def jwt_encode(payload)
+    payload[:exp] = Time.now.to_i + EXP.seconds
     JWT.encode(payload, Rails.application.secrets.secret_key_base)
   end
 

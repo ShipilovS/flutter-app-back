@@ -8,14 +8,12 @@ class Api::AuthenticationsController < ApplicationController
       token = jwt_encode(payload)
       render json: {
           data: {
+              user_id: @user.id,
               token: token
           }
       }
     else
-      render json: {
-          data: {},
-          errors: 'NotAuthorizedError'
-      }
+      raise Pundit::NotAuthorizedError
     end
   end
 

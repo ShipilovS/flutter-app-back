@@ -66,3 +66,5 @@ gem "pry-rails", "~> 0.3.9"
 gem "pry", "~> 0.14.2"
 
 gem "bcrypt-ruby", "~> 3.1"
+
+gem "rack-cors", "~> 2.0"
