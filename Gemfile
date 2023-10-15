@@ -68,3 +68,5 @@ gem "pry", "~> 0.14.2"
 gem "bcrypt-ruby", "~> 3.1"
 
 gem "rack-cors", "~> 2.0"
+
+gem "pagy", "~> 6.1"

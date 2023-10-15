@@ -7,6 +7,16 @@ RSpec.describe 'api/notes', type: :request do
     get('list notes') do
       security [bearerAuth: []]
       response(200, 'successful') do
+        parameter name: :page,
+                  in: :query,
+                  type: :integer,
+                  description: "Страница"
+
+          parameter name: :items,
+                  in: :query,
+                  type: :integer,
+                  description: "Количество на странице"
+
 
         after do |example|
           example.metadata[:response][:content] = {
