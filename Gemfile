@@ -70,3 +70,5 @@ gem "bcrypt-ruby", "~> 3.1"
 gem "rack-cors", "~> 2.0"
 
 gem "pagy", "~> 6.1"
+
+gem "blueprinter", "~> 0.30.0"

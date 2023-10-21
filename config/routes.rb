@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resource 'authentication', only: [] do
       post 'login'
     end
-    resources :notes
+    resources :notes, only: [:index, :show]
   end
 
 end
