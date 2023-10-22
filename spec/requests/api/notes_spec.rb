@@ -29,21 +29,33 @@ RSpec.describe 'api/notes', type: :request do
       end
     end
 
-  #   post('create note') do
-  #     security [bearerAuth: []]
-  #     response(200, 'successful') do
-  #
-  #       after do |example|
-  #         example.metadata[:response][:content] = {
-  #           'application/json' => {
-  #             example: JSON.parse(response.body, symbolize_names: true)
-  #           }
-  #         }
-  #       end
-  #       run_test!
-  #     end
-  #   end
-  # end
+    post('create note') do
+      security [bearerAuth: []]
+      consumes 'application/json'
+      produces 'application/json'
+
+      parameter name: :note,
+                in: :body,
+                schema: {
+                    type: :object,
+                    properties: {
+                        text: { type: :string },
+                    }
+                }
+
+      response(200, 'successful') do
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
   #
   # path '/api/notes/{id}' do
   #   # You'll want to customize the parameter types...
@@ -108,5 +120,5 @@ RSpec.describe 'api/notes', type: :request do
   #       run_test!
   #     end
   #   end
-  end
+  # end
 end

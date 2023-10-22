@@ -14,4 +14,8 @@ class ApplicationController < ActionController::API
     decoded_token = jwt_decode(header)
     @current_user = User.find(decoded_token['id'])
   end
+
+  # def pundit_user
+  #   @current_user
+  # end
 end
