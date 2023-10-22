@@ -6,11 +6,11 @@ module AuthJwt
 
   def jwt_encode(payload)
     payload[:exp] = Time.now.to_i + EXP.seconds
-    JWT.encode(payload, Rails.application.secrets.secret_key_base)
+    JWT.encode(payload, Rails.application.secret_key_base)
   end
 
   def jwt_decode(token)
-    decoded_user = JWT.decode(token, Rails.application.secrets.secret_key_base)[0]
+    decoded_user = JWT.decode(token, Rails.application.secret_key_base)[0]
     decoded_user
   end
 end
