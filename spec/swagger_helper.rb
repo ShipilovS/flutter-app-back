@@ -30,6 +30,9 @@ RSpec.configure do |config|
               default: '127.0.0.1:3000'
             }
           }
+        },
+        {
+            url: 'http://81.200.150.80:3000'
         }
       ],
       components: {
