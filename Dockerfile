@@ -26,7 +26,8 @@ RUN apk add --update --no-cache \
 RUN gem install bundler -v 2.4.20
 WORKDIR /app
 COPY Gemfile Gemfile.lock ./
-RUN bundle install
 COPY . ./
+RUN bundle install
+CMD ["RAILS_ENV", "TEST", "rails", "rswag"]
 CMD ["rails", "s", "-b", "0.0.0.0"]
 EXPOSE 3000
