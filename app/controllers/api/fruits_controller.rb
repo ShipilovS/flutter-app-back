@@ -18,7 +18,7 @@ class Api::FruitsController < ApplicationController
   def fruits_by_date
     @collection = @collection.where(
         user_fruits: {
-            selected_date: Date.parse(params[:selected_date])
+            selected_date: Date.parse(params[:selected_date].to_s || Date.today.to_s)
         }
     )
 
@@ -30,7 +30,7 @@ class Api::FruitsController < ApplicationController
     #     meta: @meta
     # }
     render json: {
-        data: @collection
+        data: FruitBlueprint.render_as_hash(@collection)
     }
   end
 
