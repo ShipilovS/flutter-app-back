@@ -1,9 +1,14 @@
 class Api::FruitsController < ApplicationController
-  before_action :set_collection, only: [:index, :update, :fruits_by_date]
+  before_action :set_collection, only: [
+      :index,
+      :update,
+      :fruits_by_date,
+      :create_user_fruit
+  ]
   before_action :set_record, only: [:show]
 
   def index
-    @pagy, @items = pagy(@collection, page: params[:page], items: params[:items])
+    @pagy, @items = pagy(Fruit.all, page: params[:page], items: params[:items])
     @meta = pagy_metadata(@pagy)
     # убрано на время
     # render json: {
@@ -11,14 +16,18 @@ class Api::FruitsController < ApplicationController
     #     meta: @meta
     # }
     render json: {
-        data: @collection
+        data: Fruit.all
     }
+  end
+
+  def show
+    render json: { data: @record }
   end
 
   def fruits_by_date
     @collection = @collection.where(
         user_fruits: {
-            selected_date: Date.parse(params[:selected_date].to_s || Date.today.to_s)
+            selected_date: Date.parse(params[:selected_date]&.to_s || Date.today.to_s)
         }
     )
 
@@ -34,6 +43,10 @@ class Api::FruitsController < ApplicationController
     }
   end
 
+  def create_user_fruit
+
+  end
+
   private
 
   def set_collection
@@ -42,6 +55,7 @@ class Api::FruitsController < ApplicationController
 
   def set_record
     @record = Fruit.find_by(id: params[:id])
+    raise ActiveRecord::RecordNotFound if @record.nil?
   end
 
 end

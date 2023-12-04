@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       post 'login'
     end
     resources :notes
-    resources :fruits, only: [:index] do
+    resources :fruits, only: [:index, :show, :create] do
       collection do
         get "fruits_by_date"
       end
