@@ -18,7 +18,6 @@ module ErrorsHelper
     rescue_from JWT::JWKError, JWT::DecodeError do |error|
       failure(error, "Ошибка токена", status: :unauthorized)
     end
-
     rescue_from JWT::ExpiredSignature do |error|
       failure(error, "Время действия токена истекло", status: :unauthorized)
     end
@@ -31,10 +30,11 @@ module ErrorsHelper
     render json: {
         data: {},
         errors: {
+            error: error,
             title: title,
             message: error.class,
-            status: kwargs[:status],
+            status: kwargs[:status] || 400,
         }
-    }, status: kwargs[:status]
+    }, status: kwargs[:status] || 400
   end
 end

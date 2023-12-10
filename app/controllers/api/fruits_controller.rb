@@ -44,7 +44,12 @@ class Api::FruitsController < ApplicationController
   end
 
   def create_user_fruit
-
+    user_fruit = @current_user.user_fruits.new(
+        permitted_params
+    )
+    user_fruit.selected_date = Date.today.to_s
+    user_fruit.save
+    success(user_fruit)
   end
 
   private
@@ -56,6 +61,10 @@ class Api::FruitsController < ApplicationController
   def set_record
     @record = Fruit.find_by(id: params[:id])
     raise ActiveRecord::RecordNotFound if @record.nil?
+  end
+
+  def permitted_params
+    params.require(:fruit).permit(:fruit_id)
   end
 
 end

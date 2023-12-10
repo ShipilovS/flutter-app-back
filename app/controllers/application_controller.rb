@@ -3,6 +3,7 @@ class ApplicationController < ActionController::API
   include AuthJwt
   include ErrorsHelper
   include Pagy::Backend
+  include ResponseHelper
 
   before_action :authenticate, except: [:login]
 

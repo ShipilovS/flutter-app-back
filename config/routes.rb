@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :fruits, only: [:index, :show, :create] do
       collection do
         get "fruits_by_date"
+        post "create_user_fruit"
       end
     end
   end
