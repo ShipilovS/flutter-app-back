@@ -3,7 +3,7 @@ module ErrorsHelper
   include ActiveSupport::Rescuable
 
   included do
-    rescue_from JWT::DecodeError do |error|
+    rescue_from JWT::DecodeError, ActionController::BadRequest do |error|
       failure(error, 'Произошла ошибка', status: :internal_server_error)
     end
 

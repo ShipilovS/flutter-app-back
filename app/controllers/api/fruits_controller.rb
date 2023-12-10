@@ -6,6 +6,7 @@ class Api::FruitsController < ApplicationController
       :create_user_fruit
   ]
   before_action :set_record, only: [:show]
+  before_action :set_user_fruit, only: [:destroy_user_fruit]
 
   def index
     @pagy, @items = pagy(Fruit.all, page: params[:page], items: params[:items])
@@ -26,9 +27,7 @@ class Api::FruitsController < ApplicationController
 
   def fruits_by_date
     @collection = @collection.where(
-        user_fruits: {
-            selected_date: Date.parse(params[:selected_date]&.to_s || Date.today.to_s)
-        }
+      selected_date: Date.parse(params[:selected_date]&.to_s || Date.today.to_s)
     )
 
     @pagy, @items = pagy(@collection, page: params[:page], items: params[:items])
@@ -39,7 +38,7 @@ class Api::FruitsController < ApplicationController
     #     meta: @meta
     # }
     render json: {
-        data: FruitBlueprint.render_as_hash(@collection)
+        data: UserFruitBlueprint.render_as_hash(@collection)
     }
   end
 
@@ -52,15 +51,24 @@ class Api::FruitsController < ApplicationController
     success(user_fruit)
   end
 
+  def destroy_user_fruit
+    @user_fruit.destroy
+    success(@user_fruit)
+  end
+
   private
 
   def set_collection
-    @collection = Fruit.joins(:user_fruits).where(user_fruits: {user_id: @current_user.id})
+    @collection = UserFruit.where(user_fruits: {user_id: @current_user.id})
   end
 
   def set_record
     @record = Fruit.find_by(id: params[:id])
     raise ActiveRecord::RecordNotFound if @record.nil?
+  end
+
+  def set_user_fruit
+    @user_fruit = find_by_or_404(UserFruit, params[:id])
   end
 
   def permitted_params

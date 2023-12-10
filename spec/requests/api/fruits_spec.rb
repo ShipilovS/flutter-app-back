@@ -100,4 +100,23 @@ RSpec.describe 'api/fruits', type: :request do
     end
   end
 
+  path '/api/fruits/{id}/destroy_user_fruit' do
+    parameter name: :id, in: :path, description: 'ID'
+    delete('Delete User Fruit') do
+      security [bearerAuth: []]
+
+      response(200, 'successful') do
+
+        after do |example|
+          example.metadata[:response][:content] = {
+              'application/json' => {
+                  example: JSON.parse(response.body, symbolize_names: true)
+              }
+          }
+        end
+        run_test!
+      end
+    end
+  end
+
 end

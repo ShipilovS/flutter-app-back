@@ -16,6 +16,9 @@ Rails.application.routes.draw do
         get "fruits_by_date"
         post "create_user_fruit"
       end
+      member do
+        delete "destroy_user_fruit"
+      end
     end
   end
 
