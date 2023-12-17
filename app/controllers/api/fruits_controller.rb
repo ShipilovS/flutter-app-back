@@ -13,11 +13,12 @@ class Api::FruitsController < ApplicationController
     @meta = pagy_metadata(@pagy)
     # убрано на время
     # render json: {
-    #     data: NoteBlueprint.render_as_json(@items),
+    #     data: FruitBlueprint.render_as_json(@items),
     #     meta: @meta
     # }
+    #         data: FruitBlueprint.render_as_json(Fruit.all)
     render json: {
-        data: Fruit.all
+        data: FruitBlueprint.render_as_json(Fruit.all)
     }
   end
 

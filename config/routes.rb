@@ -20,6 +20,8 @@ Rails.application.routes.draw do
         delete "destroy_user_fruit"
       end
     end
+
+    resources :favorites, only: [:index, :create, :destroy]
   end
 
 end

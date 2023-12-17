@@ -8,5 +8,6 @@ class User < ApplicationRecord
   has_many :notes, class_name: "Note"
   has_many :user_fruits, foreign_key: :user_id, dependent: :destroy
   has_many :fruits, through: :user_fruits
+  has_many :favorites, foreign_key: :user_id
   # has_and_belongs_to_many :fruits, join_table: "user_fruits"
 end
