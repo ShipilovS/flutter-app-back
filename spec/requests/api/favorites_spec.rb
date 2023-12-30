@@ -6,6 +6,14 @@ RSpec.describe 'api/favorites', type: :request do
 
     get('list favorites') do
       security [bearerAuth: []]
+      parameter name: 'page',
+                type: :integer,
+                in: :query,
+                description: "Страница"
+      parameter name: 'items',
+                type: :integer,
+                in: :query,
+                description: "Количество на странице"
 
       response(200, 'successful') do
 

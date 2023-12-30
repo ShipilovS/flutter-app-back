@@ -4,8 +4,13 @@ class Api::FavoritesController < ApplicationController
   before_action :set_record, only: [:show, :update, :destroy]
 
   def index
+    @pagy, @items = pagy(@fruits_collection, page: params[:page], items: params[:items])
+    @meta = pagy_metadata(@pagy)
+
     render json: {
         data: FruitBlueprint.render_as_json(@fruits_collection)
+        # data: @items,
+        # meta: @meta
     }
   end
 
@@ -30,7 +35,7 @@ class Api::FavoritesController < ApplicationController
   end
 
   def set_fruits_collection
-    @fruits_collection = @collection.map(&:object)
+    @fruits_collection = Fruit.where(id: @collection.pluck(:object_id))
   end
 
   def set_record
