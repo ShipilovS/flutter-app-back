@@ -28,6 +28,5 @@ WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 COPY . ./
 RUN bundle install
-CMD ["RAILS_ENV", "TEST", "rails", "rswag"]
 CMD ["rails", "s", "-b", "0.0.0.0"]
 EXPOSE 3000

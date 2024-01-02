@@ -32,7 +32,7 @@ RSpec.configure do |config|
           }
         },
         {
-            url: 'http://81.200.150.80:3000'
+            url: 'http://82.97.243.39:3000'
         }
       ],
       components: {

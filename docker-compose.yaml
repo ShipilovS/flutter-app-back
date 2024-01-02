@@ -1,6 +1,7 @@
 version: "3"
 services:
   db:
+    restart: always
     image: postgres:12
     ports:
       - '5432:5432'
@@ -18,6 +19,13 @@ services:
       - db
     env_file:
       - .env
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - web
 
 volumes:
   pgdata:
