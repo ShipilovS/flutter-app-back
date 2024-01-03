@@ -28,5 +28,7 @@ WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 COPY . ./
 RUN bundle install
+RUN chmod +x /app/migration.sh
+ENTRYPOINT ["/app/migration.sh"]
 CMD ["rails", "s", "-b", "0.0.0.0"]
 EXPOSE 3000
