@@ -79,7 +79,15 @@ fruits = [
     },
 ]
 
-
 fruits.each do |obj|
   Fruit.find_or_create_by(obj)
+end
+
+(1..100).each do |i|
+    Fruit.find_or_create_by({
+        name: "Фрукт #{i}",
+        size_gram: '100',
+        kilocalories: "#{rand(100)}",
+        description: "описание к товару #{i}"
+    })
 end
