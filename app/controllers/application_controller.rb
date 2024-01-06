@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
   include Pagy::Backend
   include ResponseHelper
 
-  before_action :authenticate, except: [:login]
+  before_action :authenticate, except: [:login, :refresh]
 
   private
 

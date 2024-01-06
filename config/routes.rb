@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   namespace 'api' do
     resource 'authentication', only: [] do
       post 'login'
+      post 'refresh'
     end
     resources :notes
     resources :fruits, only: [:index, :show, :create] do

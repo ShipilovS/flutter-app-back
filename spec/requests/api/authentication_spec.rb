@@ -22,4 +22,21 @@ RSpec.describe 'api/authentication', type: :request do
       end
     end
   end
+
+  path '/api/authentication/refresh' do
+    post('Get Token') do
+      tags 'Auth'
+      consumes 'application/json'
+      produces 'application/json'
+
+      parameter name: :refresh_token,
+                in: :query,
+                type: :string,
+                description: 'refresh_token'
+
+      response(200, 'successful') do
+        run_test!
+      end
+    end
+  end
 end
