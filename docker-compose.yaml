@@ -11,6 +11,7 @@ services:
       - .env.db
 
   web:
+    restart: always
     build:
       context: .
       dockerfile: Dockerfile
@@ -23,6 +24,7 @@ services:
       - .env
 
   nginx:
+    restart: always
     build: ./nginx
     ports:
       - 80:80
@@ -31,3 +33,4 @@ services:
 
 volumes:
   pgdata:
+    external: true
